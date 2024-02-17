@@ -3,6 +3,10 @@ function handleKeyboardkeyUpEvent(event){
   const playerPressed = event.key;
   // console.log('plauy',playerPressed)
 
+if(playerPressed === 'Escape'){
+  gameOver();
+}
+
   // get the expected to press
 const currentAlphabetElement = document.getElementById('current-palace')
 const currentAlphabet = currentAlphabetElement.innerText;
