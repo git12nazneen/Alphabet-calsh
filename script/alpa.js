@@ -1,9 +1,3 @@
-// function play() {
-// //  hide the home screen . to hide the screen add the hidden to the home screen
-//     const homeSection = document.getElementById('home-screen')
-//     homeSection.classList.add('hidden');
-
-
 
 function handleKeyboardkeyUpEvent(event){
   const playerPressed = event.key;
@@ -18,34 +12,41 @@ const expectedAlphabet = currentAlphabet.toLowerCase();
 // check match or not
 if(playerPressed === expectedAlphabet){
   console.log('bonus');
-//  update score
-// 1 get current score  
-const currentSccoreElement = document.getElementById('current-score');
-const currentScoreText = currentSccoreElement.innerText;
-const currentScore = parseInt(currentScoreText)
-console.log(currentScore)
-// 2 increase the score 1
-const newScore = currentScore + 1;
-// 3 show the update score
-currentSccoreElement.innerText = newScore;
-  // start a new round
+
+  const currentScore = getElementValueById('current-score');
+  const updatedScore = currentScore + 1;
+  setTextElementValueById('current-score', updatedScore);
+// //  update score
+// // 1 get current score  
+// const currentSccoreElement = document.getElementById('current-score');
+// const currentScoreText = currentSccoreElement.innerText;
+// const currentScore = parseInt(currentScoreText)
+// console.log(currentScore)
+// // 2 increase the score 1
+// const newScore = currentScore + 1;
+// // 3 show the update score
+// currentSccoreElement.innerText = newScore;
+//   // start a new round
   removeBackgroundColourById(expectedAlphabet)
   continueGame()
 }
 else{
   console.log('not bonus');
-  // strp 1: get the current life
-  const currentLifeElement = document.getElementById('current-life')
-  const currentLIfeText = currentLifeElement.innerText;
-  const currentLife = parseInt(currentLIfeText);
-  console.log(currentLife)
-  // 2:reduce the life
-  const newCurrentScore = currentLife - 1;
-  // 3: display update
-  currentLifeElement.innerText = newCurrentScore;
+  const currentLife = getElementValueById('current-life');
+  const updatedLife = currentLife - 1;
+  setTextElementValueById('current-life', updatedLife)
+  // // strp 1: get the current life
+  // const currentLifeElement = document.getElementById('current-life')
+  // const currentLIfeText = currentLifeElement.innerText;
+  // const currentLife = parseInt(currentLIfeText);
+  // console.log(currentLife)
+  // // 2:reduce the life
+  // const newCurrentScore = currentLife - 1;
+  // // 3: display update
+  // currentLifeElement.innerText = newCurrentScore;
 
-  if(newCurrentScore === 0){
-    console.log('game over')
+  if(updatedLife === 0){
+    gameOver();
   }
 
 }
@@ -71,6 +72,25 @@ function continueGame(){
 
 function play(){
   hideElementById('home-screen');
+  hideElementById('final-score');
   showElementById('plays-ground');
+  // reset game
+  setTextElementValueById('current-life', 5)
+  setTextElementValueById('current-score', 0)
   continueGame()
+}
+
+function gameOver(){
+ hideElementById('plays-ground');
+ showElementById('final-score') ;
+//  update final score
+const lastScore = getElementValueById('current-score');
+console.log(lastScore)
+setTextElementValueById('last-score', lastScore);
+
+// clear the last number
+const currentAlphabet = getElementTextById('current-palace');
+// console.log(currentAlphabet);
+removeBackgroundColourById(currentAlphabet);
+
 }
